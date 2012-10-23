@@ -1,6 +1,6 @@
 all:
-	gcc -o tarea1 drawSnoopy.cpp -lglut -lGLU -lGL -lstdc++
+	gcc -o tarea2 drawSnoopy.cpp -lglut -lGLU -lGL -lstdc++
 run:
-	./tarea1
+	./tarea2
 clean:
-	rm tarea1
+	rm tarea2
