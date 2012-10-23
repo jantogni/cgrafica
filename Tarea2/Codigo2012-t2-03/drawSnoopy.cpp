@@ -30,7 +30,8 @@ GLdouble y_snoopy;
 GLdouble x_box;
 GLdouble y_box;
 
-GLdouble g_v;
+GLdouble g_v;	
+GLdouble g_z;	
 
 GLdouble zoom;
 
@@ -72,9 +73,6 @@ void DisplaySnoopy(GLfloat xls, GLfloat yls, GLfloat xlp, GLfloat ylp){
                 for(j = 1; j <= nroPuntos; j++){       
 			datos >> xj >> yj;
 		
-			//xj += x_snoopy; 
-			//yj += y_snoopy;
-
                         glVertex2f(xj+x_snoopy, yj+y_snoopy);
 
 			//Se identifican las coordenadas extremas de la figura para poder formar un rectangulo
@@ -159,11 +157,11 @@ void keyboard( GLubyte key, GLint x, GLint y ){
 		break;
 
 	case 'i':	
-		zoom += g_v;
+		zoom += g_z;
 		break;
 
 	case 'o':	
-		zoom -= g_v;
+		zoom -= g_z;
 		break;
 
 	}
@@ -228,7 +226,8 @@ int main(int argc, char** argv){
 	x_box = 0;
 	y_box = 0;
 	
-	g_v = 0.5;   
+	g_v = 0.4;   
+	g_z = 0.2;
 
 	zoom = 1;
 
