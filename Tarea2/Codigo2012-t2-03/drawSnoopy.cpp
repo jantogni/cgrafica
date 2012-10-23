@@ -23,10 +23,6 @@ GLfloat xs = 1, ys = 1; //Global Scale for Static Snoopy
 GLdouble width = 1.0;		//Definicion del factor de ancho
 GLdouble height = 1.0;		//Definicion del factor de alto
 
-struct MyVertex{
-	float x, y;
-};
-
 GLboolean flat = GL_TRUE;
 GLdouble x_snoopy;
 GLdouble y_snoopy;
@@ -38,8 +34,8 @@ GLdouble g_v;
 
 GLdouble zoom;
 
-bool existeArchivo(string nombreArchivo)
-{       struct stat stArchivoInfo;
+bool existeArchivo(string nombreArchivo){       
+	struct stat stArchivoInfo;
         if(stat(nombreArchivo.c_str(),&stArchivoInfo))
         {       cout << "No se puede abrir el archivo snoopy3.txt" << endl;
                 getchar();
@@ -66,7 +62,8 @@ void DisplaySnoopy(GLfloat xls, GLfloat yls, GLfloat xlp, GLfloat ylp){
         existeArchivo("2012-2-cg-snoopy.txt");
         ifstream datos("2012-2-cg-snoopy.txt");
         glClear(GL_COLOR_BUFFER_BIT);
-        glTranslatef(xlp,ylp,0);
+        //glTranslatef(xlp,ylp,0);
+	glTranslatef(10,10,0);
         glScalef(5.0*xls,5.0*yls, 1.0);
         do{       
 		datos >> nroPuntos >> lineFill;
@@ -75,10 +72,10 @@ void DisplaySnoopy(GLfloat xls, GLfloat yls, GLfloat xlp, GLfloat ylp){
                 for(j = 1; j <= nroPuntos; j++){       
 			datos >> xj >> yj;
 		
-			xj += x_snoopy; 
-			yj += y_snoopy;
+			//xj += x_snoopy; 
+			//yj += y_snoopy;
 
-                        glVertex2f(xj, yj);
+                        glVertex2f(xj+x_snoopy, yj+y_snoopy);
 
 			//Se identifican las coordenadas extremas de la figura para poder formar un rectangulo
 			if (xj < min_x)
@@ -97,30 +94,25 @@ void DisplaySnoopy(GLfloat xls, GLfloat yls, GLfloat xlp, GLfloat ylp){
 	//En este caso el primer y ultimo vertice es el del extremo inferior izquerdo
 
 	min_x += x_box;
-	//max_x += x_box;
+	max_x += x_box;
 	
 	min_y += y_box;
-	//max_y += y_box;
+	max_y += y_box;
 
 	glBegin(GL_LINE_STRIP);
-		glVertex2f(min_x-1, min_y-1);
-		glVertex2f(min_x-1, max_y+1);
-		glVertex2f(max_x+1, max_y+1);
-		glVertex2f(max_x+1, min_y-1);
-		glVertex2f(min_x-1, min_y-1);
+		glVertex2f(max_x, max_y);
+		glVertex2f(min_x, max_y);
+		glVertex2f(min_x, min_y);
+		glVertex2f(max_x, min_y);		
+		glVertex2f(max_x, max_y);
 	glEnd();
-	
-	free(datos);
 
 	glutSwapBuffers();
 }
 
 int staticS;
 
-void specialkeys( GLint key, GLint u, GLint v )
-{   
-	/* arrow keys */
-		/* move the point of view */
+void specialkeys( GLint key, GLint u, GLint v ){   
 	switch (key) {
 	case GLUT_KEY_UP:
         	y_snoopy += g_v;
@@ -148,8 +140,7 @@ void specialkeys( GLint key, GLint u, GLint v )
 	}
 }
 
-void keyboard( GLubyte key, GLint x, GLint y )
-{   
+void keyboard( GLubyte key, GLint x, GLint y ){   
 	switch (key) {
 	case 'w':	
 		y_box += g_v;
@@ -178,29 +169,27 @@ void keyboard( GLubyte key, GLint x, GLint y )
 	}
 }
 
-void displays(void)
-{	
+void displays(void){	
 	glMatrixMode(GL_MODELVIEW);
 	gluOrtho2D(0.0, (GLdouble)sww * width * zoom, 0.0, (GLdouble)swh * height * zoom); //se aplica un factor a right y top
 	DisplaySnoopy((GLfloat)xs/2,(GLfloat)ys/2, (GLfloat)sww/4, (GLfloat)swh/4);
 	glutSwapBuffers();
 }
 
-void refreshDisplay(void)
-{
+void refreshDisplay(void){
         glutSetWindow(staticS);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         glutPostRedisplay();
 }
 
-void myinit(void)
-{       glClearColor(0.0, 0.0, 0.0, 1.0);
+void myinit(void){       
+	glClearColor(0.0, 0.0, 0.0, 1.0);
         glColor3f(1.0, 1.0, 1.0);
 }
 
-void myReshape(int w, int h)
-{       glViewport(0, 0, w, h); //New viewport
+void myReshape(int w, int h){       
+	glViewport(0, 0, w, h); //New viewport
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
@@ -224,8 +213,7 @@ void myReshape(int w, int h)
 	Open window with initial window size, title bar, 
 	RGBA display mode, and handle input events.	*/
 
-int main(int argc, char** argv)
-{	
+int main(int argc, char** argv){	
 	glutInit(&argc,argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
         glutInitWindowSize     (sww, swh); // window size
@@ -240,7 +228,7 @@ int main(int argc, char** argv)
 	x_box = 0;
 	y_box = 0;
 	
-	g_v = 0.2;   
+	g_v = 0.5;   
 
 	zoom = 1;
 
