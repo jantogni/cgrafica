@@ -13,7 +13,11 @@ enum shapeTypes {cube = 1, sphere} type;
 
 GLfloat xpos = 0.0f;
 GLfloat ypos = 0.0f;
-GLfloat zpos = -10.0f;
+GLfloat zpos = 0.0f;
+
+GLfloat x_vector[100];
+GLfloat y_vector[100];
+GLfloat z_vector[100];
 
 GLfloat delta = 0.2f;
 
@@ -65,10 +69,9 @@ void addShape(enum shapeTypes type){
 void keys(unsigned char key, int x, int y){
 	switch(key){
 		case 'x':
-			for(int i=0; i<shapes_number-1; i++){
-				shapes[i].x -= delta;
-				xpos -= delta;
-			}
+			for(i=0; i<shapes_number-1; i++)
+				shapes[i].x = x_vector[i+1];
+			shapes[shapes_number-1].x -= delta;
 			break;
 
 		case 'X':
@@ -155,7 +158,7 @@ void keys(unsigned char key, int x, int y){
 			}
 			break;
 
-		case 27: // Exit
+		case 27:
 			exit(0);
 			break;
 	}
@@ -180,20 +183,23 @@ void drawShapes(){
 		}
 	}
 
-	for (i = shapes_number; i > 0; i--){
+	for (i = 0; i < shapes_number; i++){
 		glLoadIdentity();
-		glColor3f(shapes[i-1].r,shapes[i-1].g,shapes[i-1].b);
+		glColor3f(shapes[i].r,shapes[i].g,shapes[i].b);
 		glColorMaterial(GL_FRONT, GL_DIFFUSE);
-		glTranslatef(shapes[i-1].x, shapes[i-1].y, shapes[i-1].z);
+		glTranslatef(shapes[i].x, shapes[i].y, shapes[i].z);
 
+		x_vector[i] = shapes[i].x;
+		y_vector[i] = shapes[i].y;
+		z_vector[i] = shapes[i].z;
 
-		switch(shapes[i-1].type){
+		switch(shapes[i].type){
 			case cube:
-				glutSolidCube(shapes[i-1].size);
+				glutSolidCube(shapes[i].size);
 				break;
 
 			case sphere:
-				glutSolidSphere(shapes[i-1].size/2, 100*shapes[i-1].size, 100*shapes[i-1].size);
+				glutSolidSphere(shapes[i].size/2, 100*shapes[i].size, 100*shapes[i].size);
 				break;
 		}
 	}
