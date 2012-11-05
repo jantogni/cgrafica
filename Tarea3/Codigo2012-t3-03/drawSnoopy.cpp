@@ -41,9 +41,9 @@ void addShape(enum shapeTypes type){
 		shapes[shapes_number-1].y = 0.0f;
 		shapes[shapes_number-1].z = -10.0f;
 
-		shapes[shapes_number-1].r = 0;
-		shapes[shapes_number-1].g = 104;
-		shapes[shapes_number-1].b = 139;
+		shapes[shapes_number-1].r = 20;
+		shapes[shapes_number-1].g = 3;
+		shapes[shapes_number-1].b = 3;
 	}
 	else{
 		xpos -= delta;
@@ -54,7 +54,7 @@ void addShape(enum shapeTypes type){
 		shapes[shapes_number-1].z = zpos;
 
 		shapes[shapes_number-1].r = 0;
-		shapes[shapes_number-1].g = 205;
+		shapes[shapes_number-1].g = 30;
 		shapes[shapes_number-1].b = 102;
 	}
 
@@ -180,20 +180,20 @@ void drawShapes(){
 		}
 	}
 
-	for (i = 0; i < shapes_number; i++){
+	for (i = shapes_number; i > 0; i--){
 		glLoadIdentity();
-		glColor3f(shapes[i].r,shapes[i].g,shapes[i].b);
-		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-		glTranslatef(shapes[i].x, shapes[i].y, shapes[i].z);
+		glColor3f(shapes[i-1].r,shapes[i-1].g,shapes[i-1].b);
+		glColorMaterial(GL_FRONT, GL_DIFFUSE);
+		glTranslatef(shapes[i-1].x, shapes[i-1].y, shapes[i-1].z);
 
 
-		switch(shapes[i].type){
+		switch(shapes[i-1].type){
 			case cube:
-				glutSolidCube(shapes[i].size);
+				glutSolidCube(shapes[i-1].size);
 				break;
 
 			case sphere:
-				glutSolidSphere(shapes[i].size/2, 100*shapes[i].size, 100*shapes[i].size);
+				glutSolidSphere(shapes[i-1].size/2, 100*shapes[i-1].size, 100*shapes[i-1].size);
 				break;
 		}
 	}
@@ -216,7 +216,7 @@ int main (int argc, char **argv){
 	glutInitWindowPosition (0, 0);
 	glutCreateWindow ("Spheres");
 
-//	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 //	glEnable(GL_LIGHTING);
 //	glEnable(GL_COLOR_MATERIAL);
 //
