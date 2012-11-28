@@ -1,40 +1,26 @@
-Tarea 2: Computación Gráfica 
+Tarea 3: Computación Gráfica 
 
 Autor: Jonathan Antognini C.
 
-Snoopy:
-	Esta tarea se programó y ejecutó usando Linux (Ubuntu 10.10). En el siguiente archivo se escribirá una pequeña
-	reseña de cada punto solicitado en la tarea.
+1. Los controles para desplazar la figura son:
+	- X, x, para desplazar en el eje x.
+	- Y, y, para desplazar en el eje y.
+	- Z, z, para desplazar en el eje z.
 
-1. Los controles para desplazar la figura completa, es decir, el snoopy y el cuadro, son las flechas siguiendo la lógica de cada una. Estos botones son
-	(flechas) son definiciones de glut. Para mover solamente la caja, se usaron los botones 
-	- a: izquerda
-	- s: abajo
-	- d: derecha
-	- w: arriba
+Se dispusieron algunas figuras (esfera y cubo), además de poder aplicar luz a las figuras (botones 8, 9, 0). Se logran añadir cuerpos prediseñados por opengl, 
+además de ubicar estos cuerpos con cierta traslación en los ejes respectivos. Al accionar las teclas se realiza un movimiento definido como delta dependiendo del
+botón apretado. Además se habilitó la macro GL_DEPTH_TEST, para realizar una especie de Z Buffering.
 
-	Y para cambiar la dimensión de la figura, para hacer agrandarla o, achicarla i.
-	
-	Las funciones que que se añadieron en el main fueron glutKeyboardFunc(arg1): para las flechas, y glutSpecialFunc(arg2): para las teclas especiales. arg1 y
-	arg2 son las funciones donde se "captura" la tecla apretada, y se realiza un cálculo de offset.
+No se logró hacer que las figuras se siguieran por diversos motivos:
+	- La idea parecía sencilla de implementar, y lo que se intentó fue, para cada definición de shape, se generó una estructura que contenía la posición donde 
+	estaba situada la figura (además de otros campos, como color, etc.). La idea era mantener un arreglo de shapes, y al momento de realizar un movimiento,
+	se reasignarían las posiciones nuevas de los shapes. Para ello se iba a hacer lo siguiente:
+		- Se aplica movimiento a la cabecera.
+		- El shape[i] se ubica en las coordenadas del shape[i+1], es decir, el shape avanzaba a la posición de shape siguiente.
+	Al programar esta idea no se lograba vislumbrar los movimientos (la pantalla parpadeaba y ni si quiera aparecían las nuevas figuras).
 
-	Cada uno de estos movimientos generaba cambios en el display del snoopy. Por ejemplo si paretaba flecha izquerda, debía desplazar ambas cosas, y estos se 
-	realizó usando una variable global como offset, es decir, para este ejemplo se le restaba un factor de coordenada. En cada caso se realiza el ajuste del 
-	offset de la figura y del snoopy. Para las letras a,s,d,w es una forma similar, pero solo se modifica el offset de la caja. Estas variables se manejan de
-	forma global.
-
-	Entonces la idea a grandes rasgos fue:
-	- Identificar las teclas de movimiento
-	- Cuando se apreta una, se recalcula un offset (ya sea de movimiento o de zoom)
-	- Cuando se va a hacer un display del snoopy, se recalculan los puntos donde aparecerá el snoopy.
-	- Cuando llamo la función displays(), que también se ocupó para mantener las dimensiones de snoopy, se aplica un factor zoom ahora.
-	- Se iteran nuevamente los pasos anteriores.
-
-	Respecto a que el snoopy se mantuviera dentro del cuadro, no logré hacerlo funcionar a la perfección por lo que no lo añadí al código. Sin embargo
-	lo que se intentó hacer fue:
-	- Calcular las dimensiones del snoopy, y que, por ejemplo el (x_min + dim_x,y_min + dim_y), es decir, tomaba el extremo más a la derecha, y que ese punto
-	no superara la dimensión de la ventana. Mientras que por el lado izquerdo, esas coordenadas no estuvieran más a la izquerda o abajo de la ventana. Como dije
-	no me funcionó apropiadamente.
+	- Luego de intentar varias veces, logré averiguar que este problema era producto de la tarjeta de video que estaba usando (nvidia con driver privados).
+	Y para la hora no logré alcanzar a terminar.
 
 2. Para correr el programa es necesario realizar un:
 	make

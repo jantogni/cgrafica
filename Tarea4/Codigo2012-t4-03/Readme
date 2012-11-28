@@ -1,0 +1,34 @@
+Tarea 4: Computación Gráfica 
+
+Autor: Jonathan Antognini C.
+
+La idea que se planteó en la tarea era tener ciertas figuras, las cuales se eligieron cubo, cono y esfera (en 3D), las cuales
+pueden estar en ciertas posiciones en el escenario (x,y,z), además se pueden mover. Luego la idea era poner luces dentro del esceneario 
+y poder moverlas y encenderlas.
+
+El resultado del experimento no funciona de manera excelente, ya que he tenido algunos problemas por la tarjeta gráfica. Pero por lo que
+pude probar en computadores con tarjeta gráfica <> nvidia, se ve bastante bien.
+
+Los controles son los siguientes:
+	- El programa cuenta con 4 luces, las cuales se seleccionan presionando las teclas del '1' al '4'.
+	- El programa cuenta con 3 figuras, las cuales se seleccionan presionando
+	  la tecla '5' para seleccionar el cono,
+	  la tecla '6' para seleccionar el cubo,
+	  la tecla '7' para seleccionar la esfera.
+	- Para encender o apagar una luz, se presiona la tecla 'l' con la luz que se desea cambiar de estado seleccionada.
+	- Para mover la figura seleccionada:
+              tecla 'w': para mover en el eje Y+.
+              tecla 's': para mover en el eje Y-.
+		tecla 'a': para mover en el eje X-.
+		tecla 'd': para mover en el eje X+.
+              tecla 'q': para mover en el eje Z-.
+              tecla 'e': para mover en el eje Z+.
+	- Para acerca la escena usamos la tecla 'z'.
+	- Para alejar la escena usamos la tecla 'Z'.
+	- Para salir del programa, presione 'Esc'.
+	- El programa parte con:
+		La luz '1' encendida y seleccionada.
+		la luz '2', '3' y '4' apagadas.
+
+Lo que intenté y no logre, eran los efectos de superposición de objetos. Por ejemplo si un objeto tapaba al otro, no recibía iluminación. Pero
+estos puntos no fueron planteados como objetivo de la tarea.

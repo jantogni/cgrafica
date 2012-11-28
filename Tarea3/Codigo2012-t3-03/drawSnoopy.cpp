@@ -59,7 +59,7 @@ void addShape(enum shapeTypes type){
 
 		shapes[shapes_number-1].r = 0;
 		shapes[shapes_number-1].g = 30;
-		shapes[shapes_number-1].b = 102;
+		shapes[shapes_number-1].b = 182;
 	}
 
 	shapes[shapes_number-1].size = 1.0f;
@@ -69,8 +69,6 @@ void addShape(enum shapeTypes type){
 void keys(unsigned char key, int x, int y){
 	switch(key){
 		case 'x':
-			for(i=0; i<shapes_number-1; i++)
-				shapes[i].x = x_vector[i+1];
 			shapes[shapes_number-1].x -= delta;
 			break;
 
@@ -223,25 +221,25 @@ int main (int argc, char **argv){
 	glutCreateWindow ("Spheres");
 
 	glEnable(GL_DEPTH_TEST);
-//	glEnable(GL_LIGHTING);
-//	glEnable(GL_COLOR_MATERIAL);
-//
-//	GLfloat ambient[] = {0.1, 0.1, 0.1, 1.0};
-//	GLfloat diffuse[] = {0.7, 0.7, 0.7, 1.0};
-//	GLfloat specular[] = {1.0, 1.0, 1.0, 1.0};
-//
-//	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-//	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
-//	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
-//
-//	glLightfv(GL_LIGHT1, GL_AMBIENT, ambient);
-//	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse);
-//	glLightfv(GL_LIGHT1, GL_SPECULAR, specular);
-//
-//	glEnable(GL_LIGHT0);
-//
-//	GLfloat param[] = {0.5, 0.5, 0.5};
-//	glLightModelfv(GL_LIGHT_MODEL_COLOR_CONTROL, param);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_COLOR_MATERIAL);
+
+	GLfloat ambient[] = {0.1, 0.1, 0.1, 1.0};
+	GLfloat diffuse[] = {0.7, 0.7, 0.7, 1.0};
+	GLfloat specular[] = {1.0, 1.0, 1.0, 1.0};
+
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+
+	glLightfv(GL_LIGHT1, GL_AMBIENT, ambient);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuse);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, specular);
+
+	glEnable(GL_LIGHT0);
+
+	GLfloat param[] = {0.5, 0.5, 0.5};
+	glLightModelfv(GL_LIGHT_MODEL_COLOR_CONTROL, param);
 
 	addShape(sphere);
 
