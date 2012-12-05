@@ -1,3 +1,4 @@
+\subsection{Blending}
 \frame{
 \frametitle{Blending}
 
@@ -15,38 +16,32 @@ Los principales usos son para:
 	\end{itemize}
 }
 
+\subsection{Transparencia}
 \frame{
 \frametitle{Transparencia}
 
 Una de las aplicaciones de blending, y la que fue estudiada en el trabajo fue transparencia.
 
-Blending se puede utlizar para que los bojetios aparezcan con cierto grado de transparencia.  
+Blending se puede utlizar para que los objetos aparezcan con cierto grado de transparencia.  
 
 Cuando se dibjuta algo con la opción de blending activada, el renderizado vuelve a leer los pixeles
-del fram buffer, se mezcla con el nuevo color y pone los pixeles de vuelta de donde vinieron.
-
-La dificultad reside en que el Z buffer no funciona como se esperaría para polígonos o formas transparentes. Ya que este
-impide que se dibujen los pixeles que están detrás de las cosas que ya han sido dibujados.
+del frame buffer, se mezcla con el nuevo color y pone los pixeles de vuelta de donde vinieron.
 
 }
 
+\subsection{Alpha Blending}
 \frame{
 \frametitle{Alpha Blending}
-
-El alpha blending para crear el efecto de transparencia. Esto es útil en escenas que destacan objetos de 
+Se aplica alpha blending para crear el efecto de transparencia. Esto es útil en escenas que destacan objetos de 
 cristal o líquidos. Esto lo hace combinando un primer plano translúcido con un color de fondo para crear una mezcla intermedia. 
 
 Para animaciones, el alpha blending también se puede usar para decolorar gradualmente una imagen y convertirla en otra.
 
-En OpenGL una imagen usa 4 canales para definir su color. Tres de estos son los canales de color primario - rojos, verdes y azules. 
-
-El cuarto, conocido como el canal alfa, transporta la información sobre la transparencia de la imagen. Esto especifica como los colores de primer 
-plano deberían ser combinados con los del fondo cuando uno cubre al otro.
-
-El factor alpha puede tomar cualquier valor de 0 a 1. Cuando se pone a 0 el primer plano es completamente transparente. 
+El factor alpha (del RGBA) puede tomar cualquier valor de 0 a 1. Cuando se pone a 0 el primer plano es completamente transparente. 
 Cuando se pone a 1, se hace opaco y totalmente obscurece el fondo. Cualquier valor intermedio crea una mezcla de las dos imágenes.
 }
 
+\subsection{Implementación}
 \frame{
 \frametitle{Implementación}
 En este ejemplo se dibujan dos cubos, uno dentro del otro, el exterior es rojo y el interior es verde. 
